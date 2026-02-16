@@ -1,0 +1,261 @@
+:root {
+    --primary-bg: #f5f6f7;
+    --glass-bg: rgba(255, 255, 255, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --text-color: #4a5568;
+    --accent-color: #718096;
+    --focus-color: #fbd38d;
+    /* Muted Orange/Gold */
+    --short-break-color: #fbb6ce;
+    /* Muted Pink */
+    --long-break-color: #bee3f8;
+    /* Muted Blue */
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    --radius: 24px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #eef2f7 0%, #dee7f0 100%);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition: background 1s ease-in-out;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 40px;
+    text-align: center;
+}
+
+h1 {
+    font-weight: 300;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    letter-spacing: -1px;
+}
+
+.modes {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.mode-btn {
+    background: transparent;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    color: var(--text-color);
+}
+
+.mode-btn.active {
+    background: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.timer-display {
+    font-size: 6rem;
+    font-weight: 700;
+    margin: 20px 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.btn {
+    padding: 12px 30px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    background: white;
+    color: var(--text-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: var(--text-color);
+    color: white;
+}
+
+.tasks-container {
+    text-align: left;
+    margin-top: 30px;
+}
+
+.tasks-container h2 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.task-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 12px 15px;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.5);
+    outline: none;
+}
+
+.task-list {
+    list-style: none;
+}
+
+.task-item {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 12px 15px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.task-item.completed span {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.task-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.task-btn:hover {
+    opacity: 1;
+}
+
+.timer-visual {
+    width: 220px;
+    height: 300px;
+    margin: 0 auto 30px;
+    position: relative;
+    /* Remove background black and border radius as SVG handles shape */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: floating 6s ease-in-out infinite;
+}
+
+.hourglass-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.15));
+}
+
+.sand-stream {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.running .sand-stream {
+    opacity: 1;
+    animation: sandFlow 1s linear infinite;
+}
+
+@keyframes sandFlow {
+    0% {
+        opacity: 1;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 1;
+        stroke-dashoffset: 10;
+    }
+}
+
+@keyframes floating {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+    .container {
+        padding: 20px;
+    }
+
+    .timer-display {
+        font-size: 4rem;
+    }
+}
